@@ -1,0 +1,10 @@
+{
+  "siteMetadata": {
+    "title": "Noah Blon's Homepage",
+    "siteUrl": "https://noahblon.com",
+    "description": "Noah Blon's awesome homepage."
+  },
+  "plugins": [
+    "gatsby-plugin-react-helmet"
+  ]
+}

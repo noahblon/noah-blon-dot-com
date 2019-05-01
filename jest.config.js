@@ -1,7 +1,2 @@
-'use strict';
-
-module.exports = {
-    "clearMocks": true,
-    "coverageDirectory": "coverage",
-    "testEnvironment": "node"
-};
+const jestConfigJson = require("./jest.config.json");
+module.exports = jestConfigJson;
