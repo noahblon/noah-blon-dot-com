@@ -11,10 +11,16 @@
     "noahblon"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run test:jest",
+    "test:jest": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "engines": {
     "node": ">= 8",
     "npm": ">= 5"
+  },
+  "devDependencies": {
+    "jest": "24.7.1"
   }
 }
