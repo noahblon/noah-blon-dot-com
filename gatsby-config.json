@@ -5,6 +5,14 @@
     "description": "Noah Blon's awesome homepage."
   },
   "plugins": [
-    "gatsby-plugin-react-helmet"
+    "gatsby-plugin-react-helmet",
+    {
+      "resolve": "gatsby-mdx",
+      "options": {
+        "defaultLayouts": {
+          "default": "/Users/nblon/Sites/noah-blon-dot-com/src/components/layout.js"
+        }
+      }
+    }
   ]
 }
