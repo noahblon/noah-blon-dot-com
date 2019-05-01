@@ -13,6 +13,13 @@
           "default": "/Users/nblon/Sites/noah-blon-dot-com/src/components/layout.js"
         }
       }
+    },
+    {
+      "resolve": "gatsby-source-filesystem",
+      "options": {
+        "name": "posts",
+        "path": "src/posts"
+      }
     }
   ]
 }
