@@ -1,0 +1,20 @@
+{
+  "name": "noah-blon-dot-com",
+  "version": "0.0.0",
+  "description": "My Homepage.",
+  "author": "Noah Blon <noahblon@gmail.com> (http://www.noahblon.com)",
+  "license": "MIT",
+  "private": true,
+  "keywords": [
+    "noah",
+    "blon",
+    "noahblon"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">= 8",
+    "npm": ">= 5"
+  }
+}
