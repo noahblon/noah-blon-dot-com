@@ -3,3 +3,9 @@ cache:
   directories:
     - node_modules
 node_js: '8'
+script: npm run test
+after_success: npx semantic-release
+env:
+  global:
+    secure: >-
+      2CUvNviBo+SzHu6AuPmtye7itHXwSovYQEPCIsuCZuqrO+z2DwaGIYKqf2J//+8AZ++y64T6wy+ga6geIvZZZNqGVp8zUh8AWpQkrFCZO4xzyCixzZMkKSxsuTzZMp8WYIhn7G53GQCytbEJDUDd6SvjfLFWG3LMpUs3OI5M5o49pkb3awzIT//PsHgJXOrx2bYu2FeTtuyR5Z2fqK4Q+rM6AghwNBexYb1Vdh0pLGv4A1uyVwBkbXaQWuxL/9H0o8LCVU0gLBWePplOFaiiqTnywzspRzPyXshYe+mjsew76dveOSjE6T9yxEtwEPo5GvUmJ8xYC1b7O94a4xp8WsyOmjezISGJTnPCPxZkrfiblTdZHD1STB4YSRggez/2/8GXmGF9UVe6gB2MuPNA6Rhhy6ArAVeSZlMLoPECBMHc1vLhVS2e5oh0CJCkON1bFCGdfSFFQvUkc4a+vXVTR1FI9QESW/esBly/nRW9klBrS7BhEHRBJdKMivrnPAajIgmW9cZlK6AHvGei2dYJ4AIPMVwddUtFDvZrK3gf4paCK3bwqmc3gZUQou4NtvOLz3A23uuwyz8gS01cO8T95Blt2brBEWs4PFXl3IUCdIzNLBTnzOhFk14DSGWe/CFAhGEAUdv4nKEOXm+FVegh0rd23V/vIwXXbelPZoKY6H4=
