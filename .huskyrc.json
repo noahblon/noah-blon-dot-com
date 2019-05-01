@@ -1,5 +1,5 @@
 {
   "hooks": {
-    "pre-commit": "npm test"
+    "pre-commit": "npx sort-package-json && git add package.json && npm test"
   }
 }

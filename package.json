@@ -1,29 +1,39 @@
 {
   "name": "noah-blon-dot-com",
   "version": "0.0.0",
-  "description": "My Homepage.",
-  "author": "Noah Blon <noahblon@gmail.com> (http://www.noahblon.com)",
-  "license": "MIT",
   "private": true,
+  "description": "My Homepage.",
   "keywords": [
-    "noah",
     "blon",
+    "noah",
     "noahblon"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/noahblon/noah-blon-dot-com.git"
+  },
+  "license": "MIT",
+  "author": "Noah Blon <noahblon@gmail.com> (http://www.noahblon.com)",
   "scripts": {
-    "test": "npm run test:jest",
-    "test:jest": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "commit": "npx git-cz",
     "build": "npx gatsby build",
+    "commit": "npx git-cz",
     "develop": "cross-env GATSBY_GRAPHQL_IDE=playground npx gatsby develop",
     "serve": "npx gatsby serve",
-    "start": "npm run develop"
+    "start": "npm run develop",
+    "test": "npm run test:jest",
+    "test:coverage": "jest --coverage",
+    "test:jest": "jest",
+    "test:watch": "jest --watch"
   },
-  "engines": {
-    "node": ">= 8",
-    "npm": ">= 5"
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "gatsby": "2.3.34",
+    "react": "16.8.6",
+    "react-dom": "16.8.6"
   },
   "devDependencies": {
     "@semantic-release/github": "5.2.10",
@@ -33,20 +43,11 @@
     "eslint": "5.16.0",
     "husky": "2.1.0",
     "jest": "24.7.1",
-    "prettier": "1.17.0"
+    "prettier": "1.17.0",
+    "sort-package-json": "1.22.1"
   },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-conventional-changelog"
-    }
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/noahblon/noah-blon-dot-com.git"
-  },
-  "dependencies": {
-    "gatsby": "2.3.34",
-    "react": "16.8.6",
-    "react-dom": "16.8.6"
+  "engines": {
+    "node": ">= 8",
+    "npm": ">= 5"
   }
 }
