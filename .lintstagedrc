@@ -3,6 +3,10 @@
     "package.json": [
       "npx sort-package-json",
       "git add"
+    ],
+    "*.{js,json,md}": [
+      "prettier --write",
+      "git add"
     ]
   }
 }
