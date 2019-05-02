@@ -1,0 +1,101 @@
+---
+title: An Intro to SVG Animation With SMIL
+slug: an-intro-to-svg-animation-with-smil
+date: Sep. 05, 2014
+---
+
+[Sitepoint](http://www.sitepoint.com/challenge-1-recreate-gif-css/ "link to Sitepoint article") recently posed a challenge to recreate this fun gif animation in code:
+
+<div style="text-align: center">
+  ![](http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1407310358spinner-cropped.gif)
+</div>
+
+It looks deceptively simple, but it's hard to do without a lot of keyframes. My mind jumped to SVG, and I've been wanting to give SMIL a shot. I didn't find many resources on SMIL out there, so I thought I'd share what I learned.
+
+## WTF SMIL?
+
+SMIL, Synchronized Multimedia Integration Language, is a markup language you can use to animate SVGs without CSS or JS. Because SVG is vector-based, with SMIL you can create more complex animations than what's possible with CSS and DOM elements. There is one big downside to SMIL: it's not supported in any version of IE. Every other browser supports SMIL through several versions.
+
+## Shape tweening with SMIL
+
+To recreate the gif, I broke it into individual frames. I plugged the image into [gifexplode.com](http://gifexplode.com/ "link to gifexplode.com") which spat out this image:
+
+<div style="text-align: center">
+  ![](https://s3-us-west-2.amazonaws.com/s.cdpn.io/18515/gifexploded.png)
+</div>
+
+The shapes [tween](http://en.wikipedia.org/wiki/Inbetweening "link to wikipedia article on inbetweening") from square to diamond to triangle to circle and back to square. The colors also transition from green to blue to red and back to green.
+
+I wanted to write the SVG shapes by hand, so I created the four major shapes: square, diamond, triangle and circle. An SVG with a `viewbox` of 100x100 keeps the coordinates easy to work with.
+
+The syntax for animating a path is like this:
+
+    <svg viewbox="0 0 100 100">
+      <path>
+        <animate/>
+      </path>
+    </svg>
+
+Add attributes and values to the `animate` element to define the animation. Here's the code for tweening a square into a triangle.
+
+<div class="codepen-demo">
+
+See the Pen [An Intro to SVG Animation with SMIL - Example 1](http://codepen.io/noahblon/pen/ufHnd/) by Noah Blon ([@noahblon](http://codepen.io/noahblon)) on [CodePen](http://codepen.io).
+
+</div>
+
+The animate element has 4 attributes:
+
+- `attributeName="d"`: name of the attribute that will be animated. The SVG `d` attribute contains coordinates that define a path.
+
+- `dur="3000ms"`: animation duration, 3000 milliseconds or 3 seconds
+
+- `repeatCount="indefinite"`: number of times the animation runs. Indefinite runs forever.
+
+- `values="{coordinate list}"`: list of paths coordinates the animation tweens.
+
+The values list is where the real magic happens. The list contains any number of paths definitions, and the animation tweens those paths over its duration. I ran across a few limitations though.
+
+The paths need to have the same number of vertices. When the animation runs, it tweens the vertices in the order they appear in the definition. If the number of vertices doesn't match, the animation won't run. It jumps between the start and end. I defined each shape with four vertices and made sure the position of each vertex matched up with how I wanted the animation to run.
+
+In the square to triangle demo, the first vertex of the square is at its upper left corner. The first vertex of the triangle is at a point in the middle of its left edge. SMIL tweens the position of this vertex, collapsing the upper right corner of the square down into the side of the triangle.
+
+I was only able to tween paths with curves defined with beziers -- [the C and Q commands](http://www.w3.org/TR/SVG/paths.html#PathDataCurveCommands "link to the SVG spec c command"). In SVG, you can define curves in several ways, but I was only able to animate paths with bezier curves. In my experience, Illustrator outputs arcs in the bezier syntax, which makes this easier.
+
+## Reticulating Splines...
+
+<div class="codepen-demo">
+
+See the Pen [An Intro to SVG Animation with SMIL - Example 2](http://codepen.io/noahblon/pen/eIhdC/) by Noah Blon ([@noahblon](http://codepen.io/noahblon)) on [CodePen](http://codepen.io).
+
+</div>
+
+I've added the remaining coordinates for the animation to tween. Each set of coordinates is a stop along the way of the animation. All the stuff between the coordinates is figured out by the browser. In some places, I've defined the same shape consecutively. This is so the animation pauses on this shape.
+
+There are also new attributes:
+
+- `keyTimes="{keytimes list}"`: list of semicolon-separated values starting with 0 and ending with 1\. There should be as many `keyTimes` values as there are path definitions. If there are more or less values, the animation won't run. `keyTimes` are percentages of the duration at which the corresponding `value` finishes its tween. In the demo, the second and third values in `keyTimes` are .0625 and .20833\. The second and third value in `values` are paths defining a square and diamond. This means that between 6.25% and 20.833% of the duration of the animation, the animation tweens between a square and diamond.
+
+- `calcMode="spline"`: defines how the animation eases. It's linear by default, meaning no easing. Setting the value to `spline` tells the animation to ease along configurable bezier curves.
+
+- `keySplines="{spline list}"`: bezier curves along which the animation eases. The `calcMode` must be set to `spline` for the `keySplines` to be applied. The value of `keySplines` is a list of bezier curve definitions, each value separated by a semicolon. There should be as many values in `keySplines` as there are paths minus one. This is because the easing happens between values, not at values. The animation won't run without this number of values. Each spline, or bezier curve, matches up with its equivalent pair of paths. [easings.net](<[http://easings.net/](http://easings.net/)> "link to easings.net") has a nice chart of graphs showing a number of commonly used easing beziers to cheat from. One caveat, Chrome won't run the animation if there is a semicolon after the last value in `keysplines`, which is [a bug](https://code.google.com/p/chromium/issues/detail?id=410379&thanks=410379&ts=1409765768 "link to Chrome bug report").
+
+## Animating the SVG fill color
+
+Among other things, SMIL can animate fill color. Define another animation element within the path to handle the color change. The technique is the same as the path tween, except the `values` value is a list of colors instead of path definitions and the `attributeName` is `fill` instead of `d`. I've made the easing, duration, and number of values the same as the paths animation to make it easier, but it doesn't have to be. Here's the finished product!
+
+<div class="codepen-demo">
+
+See the Pen [An Intro to SVG Animation with SMIL - Example 3](http://codepen.io/noahblon/pen/qbvKt/) by Noah Blon ([@noahblon](http://codepen.io/noahblon)) on [CodePen](http://codepen.io).
+
+</div>
+
+And here it is next to the original gif:
+
+<div class="codepen-demo">
+
+See the Pen [Sitepoint Challenge #1 in SVG and SMIL](http://codepen.io/noahblon/pen/IhLFK/) by Noah Blon ([@noahblon](http://codepen.io/noahblon)) on [CodePen](http://codepen.io).
+
+</div>
+
+The animation isn't exactly like the original, but it's pretty darn close. Improve it by adding additional paths definitions and more precise easing to hint the browser to the proper tween. I like the simplicity of this code as is. There are other intriguing SVG properties such as rotation and translation that can be animated with SMIL.
