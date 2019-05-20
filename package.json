@@ -35,10 +35,12 @@
     "@mdx-js/react": "1.0.16",
     "gatsby": "2.3.34",
     "gatsby-mdx": "0.6.3",
+    "gatsby-plugin-postcss": "2.0.7",
     "gatsby-plugin-react-helmet": "3.0.12",
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "react-helmet": "5.2.1"
+    "react-helmet": "5.2.1",
+    "tailwindcss": "1.0.1"
   },
   "devDependencies": {
     "@semantic-release/github": "5.2.10",
