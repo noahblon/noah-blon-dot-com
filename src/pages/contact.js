@@ -23,6 +23,7 @@ const ContactPage = () => {
       <h2 className="text-lg font-bold mb-4">Contact Me</h2>
       <form
         name="contact"
+        action="/contact/"
         ref={form}
         method="POST"
         data-netlify="true"
@@ -40,6 +41,7 @@ const ContactPage = () => {
           <label htmlFor="message">Message</label>
           <textarea id="message" name="message" required />
         </div>
+        <input type="hidden" name="contact" value="contact" />
         <button type="submit">Send</button>
       </form>
     </Layout>
