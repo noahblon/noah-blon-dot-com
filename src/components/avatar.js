@@ -1,5 +1,6 @@
 import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
+import Img from "gatsby-image";
 
 const Avatar = () => {
   const query = graphql`
@@ -14,7 +15,11 @@ const Avatar = () => {
     }
   `;
   const { image } = useStaticQuery(query);
-  return <img src={image.sharp.fluid.src} width="200" className="mt-4" />;
+  return (
+    <div className="container">
+      <Img fluid={image.sharp.fluid} className="mt-4" />
+    </div>
+  );
 };
 
 export default Avatar;
