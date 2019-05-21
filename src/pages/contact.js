@@ -11,12 +11,11 @@ const ContactPage = () => {
     ev.preventDefault();
     try {
       const serializedFormData = serialize(form.current);
-      const action = form.current.action;
+      const action = form.current.getAttribute("action");
       await axios.post(action, serializedFormData);
       navigate(action);
     } catch (e) {
       // TODO: fix
-
       alert("fail!");
     }
   };
