@@ -41,7 +41,7 @@ const ContactPage = () => {
           <label htmlFor="message">Message</label>
           <textarea id="message" name="message" required />
         </div>
-        <input type="hidden" name="contact" value="contact" />
+        <input type="hidden" name="form-name" value="contact" />
         <button type="submit">Send</button>
       </form>
     </Layout>
