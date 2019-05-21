@@ -6,6 +6,8 @@ images:
   - ./001-1.gif
 ---
 
+import Codepen from "../components/codepen";
+
 [Sitepoint](http://www.sitepoint.com/challenge-1-recreate-gif-css/ "link to Sitepoint article") recently posed a challenge to recreate this fun gif animation in code:
 
 <div style="text-align: center">
@@ -44,11 +46,7 @@ The syntax for animating a path is like this:
 
 Add attributes and values to the `animate` element to define the animation. Here's the code for tweening a square into a triangle.
 
-<div class="codepen-demo">
-
-See the Pen [An Intro to SVG Animation with SMIL - Example 1](http://codepen.io/noahblon/pen/ufHnd/) by Noah Blon ([@noahblon](http://codepen.io/noahblon)) on [CodePen](http://codepen.io).
-
-</div>
+<Codepen slug="ufHnd" />
 
 The animate element has 4 attributes:
 
@@ -70,11 +68,7 @@ I was only able to tween paths with curves defined with beziers -- [the C and Q 
 
 ## Reticulating Splines...
 
-<div class="codepen-demo">
-
-See the Pen [An Intro to SVG Animation with SMIL - Example 2](http://codepen.io/noahblon/pen/eIhdC/) by Noah Blon ([@noahblon](http://codepen.io/noahblon)) on [CodePen](http://codepen.io).
-
-</div>
+<Codepen slug="eIhdC" />
 
 I've added the remaining coordinates for the animation to tween. Each set of coordinates is a stop along the way of the animation. All the stuff between the coordinates is figured out by the browser. In some places, I've defined the same shape consecutively. This is so the animation pauses on this shape.
 
@@ -90,18 +84,6 @@ There are also new attributes:
 
 Among other things, SMIL can animate fill color. Define another animation element within the path to handle the color change. The technique is the same as the path tween, except the `values` value is a list of colors instead of path definitions and the `attributeName` is `fill` instead of `d`. I've made the easing, duration, and number of values the same as the paths animation to make it easier, but it doesn't have to be. Here's the finished product!
 
-<div class="codepen-demo">
-
-See the Pen [An Intro to SVG Animation with SMIL - Example 3](http://codepen.io/noahblon/pen/qbvKt/) by Noah Blon ([@noahblon](http://codepen.io/noahblon)) on [CodePen](http://codepen.io).
-
-</div>
-
-And here it is next to the original gif:
-
-<div class="codepen-demo">
-
-See the Pen [Sitepoint Challenge #1 in SVG and SMIL](http://codepen.io/noahblon/pen/IhLFK/) by Noah Blon ([@noahblon](http://codepen.io/noahblon)) on [CodePen](http://codepen.io).
-
-</div>
+<Codepen slug="qbvKt" />
 
 The animation isn't exactly like the original, but it's pretty darn close. Improve it by adding additional paths definitions and more precise easing to hint the browser to the proper tween. I like the simplicity of this code as is. There are other intriguing SVG properties such as rotation and translation that can be animated with SMIL.

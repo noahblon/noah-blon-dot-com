@@ -4,6 +4,8 @@ slug: coloring-svgs-in-css-background-images
 date: Oct. 26, 2014
 ---
 
+import Codepen from "../components/codepen";
+
 I love using SVG in CSS background images but it sucks that you can't alter the `fill` color easily within your CSS. Here are a few ways around that.
 
 ## SVG in CSS backgrounds
@@ -37,11 +39,7 @@ Use the `xmnls` namespace attribute or the SVG won't work in your background. Al
 
 I'm using the `symbol` and `use` tags to keep the file size low. Define the icon shape as a `symbol` and place it in a `defs` block. Give it an `id`. Employ the `use` tag to stamp out versions of this symbol. In the `use` tag, the `x` and `y` coordinates are adjusted so the icons stack on top of each other at 24 unit increments. An inline style with the `fill` property colors the icon. Here's a demo with a bunch of different colored icons defined using this technique.
 
-<div class="codepen-demo">
-
-See the Pen [8a16bad16e744f88133c6a0d709d11ca](http://codepen.io/noahblon/pen/8a16bad16e744f88133c6a0d709d11ca/) by Noah Blon ([@noahblon](http://codepen.io/noahblon)) on [CodePen](http://codepen.io).
-
-</div>
+<Codepen slug="8a16bad16e744f88133c6a0d709d11ca" />
 
 I'm using Sass here to make the background positioning easier.
 
@@ -72,11 +70,7 @@ In this example, the icon has a pure red `fill` set in the SVG. The `hue-rotate`
 
 By chaining filters together, you can make many colored icons from one colored icon input. With different combinations of `hue-rotate`, `invert`, `brightness`, and `saturation` filters, I've created the ROYGBIV rainbow spectrum and some other basic colors like cyan and magenta.
 
-<div class="codepen-demo">
-
-See the Pen [SVG Filtered](http://codepen.io/noahblon/pen/173e75f35b4706dacabfc4a6e8780bc8/) by Noah Blon ([@noahblon](http://codepen.io/noahblon)) on [CodePen](http://codepen.io).
-
-</div>
+<Codepen slug="173e75f35b4706dacabfc4a6e8780bc8" />
 
 Creating a grayscale set of filters is super easy. You just add a `grayscale` filter and adjust a `brightness` filter to the amount of gray you need.
 
@@ -103,11 +97,7 @@ Here I'm setting an SVG as the mask. The `fill` of the icon in the SVG doesn't m
 
 Your background can be a color, image, gradient -- whatever.
 
-<div class="codepen-demo">
-
-See the Pen [SVG Mask](http://codepen.io/noahblon/pen/19e2508e9126afad45740453fd26ede1/) by Noah Blon ([@noahblon](http://codepen.io/noahblon)) on [CodePen](http://codepen.io).
-
-</div>
+<Codepen slug="19e2508e9126afad45740453fd26ede1" />
 
 There are a bunch of properties related to mask, such as `mask-position`, `mask-repeat`, and `mask-size`, which align with CSS `background` properties. You can use the `mask` shorthand like the `background` shorthand:
 
