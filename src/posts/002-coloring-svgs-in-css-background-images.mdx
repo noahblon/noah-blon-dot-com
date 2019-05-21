@@ -16,20 +16,22 @@ There are also some nice performance benefits over inline SVG. An SVG in a backg
 
 Creating sprites for SVG uses the same concepts as normal image sprites. The sprite contains all of the versions of an image. By manipulating the `background-size` and `background-position` in your CSS, you choose which version to display. Here's how to set up an SVG sprite:
 
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="24"
-        height="72">
-        <defs>
-            <g id="heart">
-              <path d="M12 21.35l-1.45-1.32c-5.15-4.67-8.55-7.75-8.55-11.53 0-3.08 2.42-5.5 5.5-5.5 1.74 0 3.41.81 4.5 2.09 1.09-1.28 2.76-2.09 4.5-2.09 3.08 0 5.5 2.42 5.5 5.5 0 3.78-3.4 6.86-8.55 11.54l-1.45 1.31z"/>
-            </g>
-        </defs>
-        <use x="0" y="0" style="fill:red" xlink:href="#heart" />
-        <use x="0" y="24" style="fill:orange" xlink:href="#heart" />
-        <use x="0" y="48" style="fill:yellow" xlink:href="#heart" />
-    </svg>
+```svg
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="24"
+    height="72">
+    <defs>
+        <g id="heart">
+            <path d="M12 21.35l-1.45-1.32c-5.15-4.67-8.55-7.75-8.55-11.53 0-3.08 2.42-5.5 5.5-5.5 1.74 0 3.41.81 4.5 2.09 1.09-1.28 2.76-2.09 4.5-2.09 3.08 0 5.5 2.42 5.5 5.5 0 3.78-3.4 6.86-8.55 11.54l-1.45 1.31z"/>
+        </g>
+    </defs>
+    <use x="0" y="0" style="fill:red" xlink:href="#heart" />
+    <use x="0" y="24" style="fill:orange" xlink:href="#heart" />
+    <use x="0" y="48" style="fill:yellow" xlink:href="#heart" />
+</svg>
+```
 
 Use the `xmnls` namespace attribute or the SVG won't work in your background. Also include the `xmlns:xlink` attribute if using links, which I am in the `use` tags. The `width` and `height` need to be large enough to contain all of the images. In the example I'm using three 24x24 icons stacked vertically, so my SVG dimensions are 24x72.
 
@@ -49,18 +51,22 @@ This technique works great everywhere SVG is supported. Because you need to manu
 
 You can apply Photoshop-like effects to DOM elements with CSS filters. Filters can be chained, with each filter acting on the result of its predecessor.
 
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewbox="0 0 24 24">
-        <path fill="red" d="M12 21.35l-1.45-1.32c-5.15-4.67-8.55-7.75-8.55-11.53 0-3.08 2.42-5.5 5.5-5.5 1.74 0 3.41.81 4.5 2.09 1.09-1.28 2.76-2.09 4.5-2.09 3.08 0 5.5 2.42 5.5 5.5 0 3.78-3.4 6.86-8.55 11.54l-1.45 1.31z"/>
-    </svg>
+```svg
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewbox="0 0 24 24">
+    <path fill="red" d="M12 21.35l-1.45-1.32c-5.15-4.67-8.55-7.75-8.55-11.53 0-3.08 2.42-5.5 5.5-5.5 1.74 0 3.41.81 4.5 2.09 1.09-1.28 2.76-2.09 4.5-2.09 3.08 0 5.5 2.42 5.5 5.5 0 3.78-3.4 6.86-8.55 11.54l-1.45 1.31z"/>
+</svg>
+```
 
-    .icon-blue {
-        -webkit-filter: hue-rotate(220deg) saturate(5);
-        filter: hue-rotate(220deg) saturate(5);
-    }
+```css
+.icon-blue {
+  -webkit-filter: hue-rotate(220deg) saturate(5);
+  filter: hue-rotate(220deg) saturate(5);
+}
+```
 
 In this example, the icon has a pure red `fill` set in the SVG. The `hue-rotate` filter rotates the hue 220 degrees around the rgb color wheel. This makes the icon blue. The algorithm for hue-rotation isn't extremely accurate, so although the output should be pure blue it’s a little off. One way to fix this and boost up the color to full saturation is to add a `saturation` filter. In the example, I added an arbitrarily large value of five to the chain, which increases the saturation by 500%.
 
@@ -85,11 +91,13 @@ CSS filters are supported well in most browsers. IE has them listed as "In Devel
 
 With the `mask` property you create a mask that is applied to an element. Everywhere the mask is opaque, or solid, the underlying image shows through. Where it’s transparent, the underlying image is masked out, or hidden. The syntax for a CSS `mask-image` is similar to `background-image`.
 
-    .icon {
-        background-color: red;
-        mask-image: url(icon.svg);
-        -webkit-mask-image: url(icon.svg);
-    }
+```css
+.icon {
+  background-color: red;
+  -webkit-mask-image: url(icon.svg);
+  mask-image: url(icon.svg);
+}
+```
 
 Here I'm setting an SVG as the mask. The `fill` of the icon in the SVG doesn't matter because it masks the background layer which is the color red. Therefore, the result is a red icon. For webkit, I'm using the prefix.
 
@@ -103,11 +111,13 @@ See the Pen [SVG Mask](http://codepen.io/noahblon/pen/19e2508e9126afad45740453fd
 
 There are a bunch of properties related to mask, such as `mask-position`, `mask-repeat`, and `mask-size`, which align with CSS `background` properties. You can use the `mask` shorthand like the `background` shorthand:
 
-    .icon {
-        background-color: red;
-        mask: url(icon.svg) no-repeat 50% 50%;
-        -webkit-mask:  url(icon.svg) no-repeat 50% 50%;
-    }
+```css
+.icon {
+  background-color: red;
+  mask: url(icon.svg) no-repeat 50% 50%;
+  -webkit-mask: url(icon.svg) no-repeat 50% 50%;
+}
+```
 
 Masks are supported in most browsers. The IE team have CSS masks listed as under consideration. Firefox currently doesn't support external SVG masks.
 

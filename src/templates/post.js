@@ -1,9 +1,18 @@
 import React from "react";
 import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-mdx";
+import { MDXProvider } from "@mdx-js/react";
+import CodeBlock from "../components/code-block";
 import Layout from "../components/layout";
 import Img from "gatsby-image";
 import PropTypes from "prop-types";
+
+const PreConverter = props => <div {...props} />;
+
+const components = {
+  pre: PreConverter,
+  code: CodeBlock
+};
 
 export const query = graphql`
   query($slug: String!) {
@@ -58,10 +67,12 @@ function buildImageVm(frontmatterImages) {
 const PostTemplate = ({ data: { mdx: post } }) => {
   const images = buildImageVm(post.frontmatter.images);
   return (
-    <Layout>
-      <h1>{post.frontmatter.title}</h1>
-      <MDXRenderer images={images}>{post.code.body}</MDXRenderer>
-    </Layout>
+    <MDXProvider components={components}>
+      <Layout>
+        <h1>{post.frontmatter.title}</h1>
+        <MDXRenderer images={images}>{post.code.body}</MDXRenderer>
+      </Layout>
+    </MDXProvider>
   );
 };
 
