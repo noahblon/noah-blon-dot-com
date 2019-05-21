@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import Layout from "../components/layout";
 import serialize from "form-serialize";
 import axios from "axios";
+import { navigateTo } from "gatsby-link";
 
 const ContactPage = () => {
   const form = useRef(null);
@@ -12,12 +13,14 @@ const ContactPage = () => {
       const serializedFormData = serialize(form.current);
       const action = form.current.action;
       await axios.post(action, serializedFormData);
-      alert("done!");
+      navigateTo(form.getAttribute("action"));
     } catch (e) {
+      // TODO: fix
       alert("fail!");
     }
   };
 
+  // TODO: netlify honeypot.  o bother.
   return (
     <Layout>
       <h2 className="text-lg font-bold mb-4">Contact Me</h2>
