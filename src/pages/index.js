@@ -3,14 +3,18 @@ import Layout from "../components/layout";
 import usePosts from "../hooks/use-posts";
 import PostPreview from "../components/post-preview";
 
-export default () => {
+const IndexPage = () => {
   const posts = usePosts();
   return (
     <Layout>
-      <h1>Noah Blon</h1>
-      {posts.map(post => (
-        <PostPreview key={post.slug} post={post} />
-      ))}
+      <h2 className="text-lg font-bold mb-4">Blog</h2>
+      <div className="container mx-auto">
+        {posts.map(post => (
+          <PostPreview key={post.slug} post={post} />
+        ))}
+      </div>
     </Layout>
   );
 };
+
+export default IndexPage;

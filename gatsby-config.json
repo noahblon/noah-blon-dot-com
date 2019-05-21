@@ -30,6 +30,13 @@
         "path": "src/posts"
       }
     },
+    {
+      "resolve": "gatsby-source-filesystem",
+      "options": {
+        "name": "images",
+        "path": "./images"
+      }
+    },
     "gatsby-transformer-sharp"
   ]
 }

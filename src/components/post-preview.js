@@ -1,7 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "gatsby";
 
-export default function PostPreview({ post }) {
+const PostPreview = ({ post }) => {
   return (
     <article>
       <Link to={post.slug}>
@@ -11,4 +12,10 @@ export default function PostPreview({ post }) {
       <Link to={post.slug}>Read this Post</Link>
     </article>
   );
-}
+};
+
+PostPreview.propTypes = {
+  post: PropTypes.object
+};
+
+export default PostPreview;
