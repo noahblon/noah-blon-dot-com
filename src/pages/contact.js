@@ -3,8 +3,23 @@ import Layout from "../components/layout";
 import serialize from "form-serialize";
 import axios from "axios";
 import { navigate } from "gatsby-link";
+import { graphql, useStaticQuery } from "gatsby";
+import Img from "gatsby-image";
 
 const ContactPage = () => {
+  const query = graphql`
+    query {
+      image: file(relativePath: { eq: "mailbox.png" }) {
+        sharp: childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+    }
+  `;
+  const { image } = useStaticQuery(query);
+
   const form = useRef(null);
 
   const handleSubmit = async ev => {
@@ -24,29 +39,64 @@ const ContactPage = () => {
   return (
     <Layout>
       <h2 className="text-lg font-bold mb-4">Contact Me</h2>
-      <form
-        name="contact"
-        action="/thanks/"
-        ref={form}
-        method="POST"
-        data-netlify="true"
-        onSubmit={handleSubmit}
-      >
-        <div>
-          <label htmlFor="name">Name</label>
-          <input type="text" id="name" name="name" required />
+      <div className="flex">
+        <div className="container">
+          <Img fluid={image.sharp.fluid} className="mt-4" />
         </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input type="text" id="email" name="email" required />
+        <div className="container">
+          <form
+            name="contact"
+            action="/thanks/"
+            ref={form}
+            method="POST"
+            data-netlify="true"
+            onSubmit={handleSubmit}
+          >
+            <div>
+              <label className="block" htmlFor="name">
+                Name
+              </label>
+              <input
+                className="border-2 border-solid border-black"
+                type="text"
+                id="name"
+                name="name"
+                required
+              />
+            </div>
+            <div>
+              <label className="block" htmlFor="email">
+                Email
+              </label>
+              <input
+                className="border-2 border-solid border-black"
+                type="email"
+                id="email"
+                name="email"
+                required
+              />
+            </div>
+            <div>
+              <label className="block" htmlFor="message">
+                Message
+              </label>
+              <textarea
+                className="border-2 border-solid border-black"
+                id="message"
+                name="message"
+                required
+              />
+            </div>
+            <input type="hidden" name="form-name" value="contact" />
+            <button
+              className="border-2 border-solid border-black p-2"
+              type="submit"
+            >
+              Send
+            </button>
+          </form>
         </div>
-        <div>
-          <label htmlFor="message">Message</label>
-          <textarea id="message" name="message" required />
-        </div>
-        <input type="hidden" name="form-name" value="contact" />
-        <button type="submit">Send</button>
-      </form>
+      </div>
     </Layout>
   );
 };
