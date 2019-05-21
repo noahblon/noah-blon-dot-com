@@ -23,7 +23,7 @@ const ContactPage = () => {
       <h2 className="text-lg font-bold mb-4">Contact Me</h2>
       <form
         name="contact"
-        action="/contact/"
+        action="/thanks/"
         ref={form}
         method="POST"
         data-netlify="true"
