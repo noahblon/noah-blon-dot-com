@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import Layout from "../components/layout";
 import serialize from "form-serialize";
 import axios from "axios";
-import { navigateTo } from "gatsby-link";
+import { navigate } from "gatsby-link";
 
 const ContactPage = () => {
   const form = useRef(null);
@@ -13,9 +13,10 @@ const ContactPage = () => {
       const serializedFormData = serialize(form.current);
       const action = form.current.action;
       await axios.post(action, serializedFormData);
-      navigateTo(form.getAttribute("action"));
+      navigate(action);
     } catch (e) {
       // TODO: fix
+
       alert("fail!");
     }
   };
