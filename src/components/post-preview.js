@@ -4,9 +4,9 @@ import { Link } from "gatsby";
 
 const PostPreview = ({ post }) => {
   return (
-    <article>
+    <article className="mb-8">
       <Link to={post.slug}>
-        <h3>{post.title}</h3>
+        <h3 className="font-bold">{post.title}</h3>
       </Link>
       <p>{post.excerpt}</p>
       <Link to={post.slug}>Read this Post</Link>

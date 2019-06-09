@@ -14,9 +14,9 @@ const MobileNav = () => {
           ✕
         </button>
         <nav className="text-white flex flex-col items-center text-xl">
-          <Link to="/">About</Link>
+          <Link to="/about/">About</Link>
           <Link to="/">Blog</Link>
-          <Link to="/contact">Contact</Link>
+          <Link to="/contact/">Contact</Link>
         </nav>
       </div>
     );

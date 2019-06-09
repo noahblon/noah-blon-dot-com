@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Head from "./head";
-import MobileNav from "../components/mobile-nav";
-import Hero from "../components/hero";
+import MobileNav from "./mobile-nav";
+import Hero from "./hero";
 import { Link } from "gatsby";
 
 const Layout = ({ children }) => {
@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
       <Head />
       <div className="flex flex-col h-screen">
         <header className="p-4 bg-black">
-          <div className="container mx-auto flex justify-between items-center">
+          <div className="container mx-auto flex justify-between items-center max-w-2xl">
             <div className="flex items-center">
               {/* <div className="text-3xl mr-2 p-3 rounded-full w-16 h-12 flex items-center av border-4 justify-center"> */}
               {/* <div className="text-3xl mr-">👨🏻‍💻</div> */}
@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
         <section>
           <Hero />
         </section>
-        <main className="mt-8 p-4 flex-grow">{children}</main>
+        <main className="mt-8 mx-auto flex-grow max-w-2xl">{children}</main>
         <footer className="container mx-auto p-4 flex flex-col items-center">
           <div className="flex">
             <a
